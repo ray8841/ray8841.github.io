@@ -1,21 +1,339 @@
-<html>
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
 <head>
-    <title></title>
-	<meta charset="utf-8" />
-    <script>
-        function Auth() {
-            var URL = 'https://notify-bot.line.me/oauth/authorize?';
-            URL += 'response_type=code';
-            URL += '&client_id=7vk14gwgdC27wCkwiwlXal';
-            URL += '&redirect_uri=https://94eb-34-168-205-243.ngrok.io/notify';
-            URL += '&scope=notify';
-            URL += '&state=NO_STATE';
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的個人介紹</title>
+    <!-- 引入 Tailwind CSS，這是一個強大的 CSS 框架，可以快速建立漂亮的介面 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Google Fonts，讓字體更美觀 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <!-- 引入 Lucide Icons 圖示庫 -->
+    <script src="https://unpkg.com/lucide-react@0.292.0/dist/lucide-react.js"></script>
 
-            window.location.href = URL;
+    <style>
+        /* 自定義樣式 */
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #111827; /* 深灰色背景 */
+            color: #E5E7EB; /* 淺灰色文字 */
         }
-    </script>
+
+        /* 打字機效果的閃爍游標 */
+        .typewriter-cursor::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+            color: #38bdf8; /* 游標顏色 */
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* 滾動動畫的準備狀態 */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* 滾動動畫的觸發狀態 */
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 技能條動畫 */
+        .skill-bar-fill {
+            width: 0%;
+            transition: width 1.5s ease-out;
+        }
+    </style>
 </head>
-<body>
-    <button onclick="Auth();">點選這裡連結到LineNotify</button>
+<body class="antialiased">
+
+    <!-- 導覽列 -->
+    <nav class="bg-gray-900/80 backdrop-blur-sm fixed w-full z-20 top-0 left-0 border-b border-gray-700">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="#" class="flex items-center space-x-3">
+                <!-- 修改成您的 Logo 或名字縮寫 -->
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">我的網站</span>
+            </a>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-700 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
+                    <li><a href="#hero" class="block py-2 px-3 text-gray-300 hover:text-sky-400 rounded md:p-0">首頁</a></li>
+                    <li><a href="#about" class="block py-2 px-3 text-gray-300 hover:text-sky-400 rounded md:p-0">關於我</a></li>
+                    <li><a href="#skills" class="block py-2 px-3 text-gray-300 hover:text-sky-400 rounded md:p-0">我的技能</a></li>
+                    <li><a href="#portfolio" class="block py-2 px-3 text-gray-300 hover:text-sky-400 rounded md:p-0">作品集</a></li>
+                    <li><a href="#contact" class="block py-2 px-3 text-gray-300 hover:text-sky-400 rounded md:p-0">聯絡我</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容 -->
+    <main>
+        <!-- 英雄區塊 (Hero Section) -->
+        <section id="hero" class="h-screen flex items-center justify-center text-center bg-gray-900">
+            <div class="px-4">
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">
+                    <!-- 修改成您的名字 -->
+                    你好，我是 王小明
+                </h1>
+                <h2 class="text-2xl md:text-4xl text-sky-400 font-semibold">
+                    我是一位 <span id="typewriter" class="typewriter-cursor"></span>
+                </h2>
+            </div>
+        </section>
+
+        <!-- 關於我 -->
+        <section id="about" class="py-20 md:py-32 scroll-reveal">
+            <div class="max-w-screen-xl mx-auto px-6 md:px-8 grid md:grid-cols-3 gap-12 items-center">
+                <div class="md:col-span-1 flex justify-center">
+                    <!-- 替換成您的照片 URL -->
+                    <img src="https://placehold.co/400x400/1F2937/E5E7EB?text=個人照片" alt="個人照片" class="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover shadow-2xl shadow-sky-500/20">
+                </div>
+                <div class="md:col-span-2">
+                    <h2 class="text-4xl font-bold mb-6 text-white">關於我</h2>
+                    <!-- 修改成您的自我介紹 -->
+                    <p class="text-lg text-gray-300 mb-4 leading-relaxed">
+                        我是一位充滿熱情的全端工程師，擁有超過五年的業界經驗，專注於打造高效能且使用者友善的網頁應用程式。我擅長使用 React、Node.js 和 Python 等現代技術棧。
+                    </p>
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        在我的職業生涯中，我致力於將複雜的問題轉化為簡潔、優雅的解決方案。我熱愛學習新技術，並樂於在團隊合作中分享知識，共同成長。閒暇時，我喜歡攝影和爬山。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 我的技能 -->
+        <section id="skills" class="py-20 md:py-32 bg-gray-900 scroll-reveal">
+            <div class="max-w-screen-xl mx-auto px-6 md:px-8">
+                <h2 class="text-4xl font-bold text-center mb-12 text-white">我的技能</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- 修改您的技能和熟練度 (data-level) -->
+                    <div class="skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-sky-300">前端開發 (HTML, CSS, JavaScript)</span>
+                            <span class="text-sm font-medium text-sky-300">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-sky-500 h-2.5 rounded-full skill-bar-fill" data-level="95%"></div>
+                        </div>
+                    </div>
+                     <div class="skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-sky-300">後端開發 (Node.js, Python)</span>
+                            <span class="text-sm font-medium text-sky-300">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-sky-500 h-2.5 rounded-full skill-bar-fill" data-level="90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-sky-300">React & Vue.js</span>
+                            <span class="text-sm font-medium text-sky-300">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-sky-500 h-2.5 rounded-full skill-bar-fill" data-level="85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="flex justify-between mb-1">
+                            <span class="text-base font-medium text-sky-300">資料庫 (SQL, MongoDB)</span>
+                            <span class="text-sm font-medium text-sky-300">80%</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5">
+                            <div class="bg-sky-500 h-2.5 rounded-full skill-bar-fill" data-level="80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 作品集 -->
+        <section id="portfolio" class="py-20 md:py-32 scroll-reveal">
+            <div class="max-w-screen-xl mx-auto px-6 md:px-8">
+                <h2 class="text-4xl font-bold text-center mb-12 text-white">作品集</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 作品一 -->
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-sky-500/30 transition-shadow duration-300">
+                        <img src="https://placehold.co/600x400/1F2937/E5E7EB?text=專案截圖一" alt="作品一" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 text-white">專案名稱一</h3>
+                            <p class="text-gray-400 mb-4">這是一個關於專案的簡短描述，說明了這個專案的目標和使用的技術。</p>
+                            <a href="#" class="text-sky-400 hover:text-sky-300 font-semibold">查看詳情 &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- 作品二 -->
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-sky-500/30 transition-shadow duration-300">
+                        <img src="https://placehold.co/600x400/1F2937/E5E7EB?text=專案截圖二" alt="作品二" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 text-white">專案名稱二</h3>
+                            <p class="text-gray-400 mb-4">這是一個關於專案的簡短描述，說明了這個專案的目標和使用的技術。</p>
+                            <a href="#" class="text-sky-400 hover:text-sky-300 font-semibold">查看詳情 &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- 作品三 -->
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-sky-500/30 transition-shadow duration-300">
+                        <img src="https://placehold.co/600x400/1F2937/E5E7EB?text=專案截圖三" alt="作品三" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 text-white">專案名稱三</h3>
+                            <p class="text-gray-400 mb-4">這是一個關於專案的簡短描述，說明了這個專案的目標和使用的技術。</p>
+                            <a href="#" class="text-sky-400 hover:text-sky-300 font-semibold">查看詳情 &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 聯絡我 -->
+        <section id="contact" class="py-20 md:py-32 bg-gray-900 scroll-reveal">
+            <div class="max-w-screen-xl mx-auto px-6 md:px-8 text-center">
+                <h2 class="text-4xl font-bold mb-4 text-white">聯絡我</h2>
+                <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                    我目前正在尋找新的工作機會，歡迎隨時與我聯繫。無論您有任何問題或只是想打個招呼，我都會盡快回覆您！
+                </p>
+                <!-- 修改成您的 Email -->
+                <a href="mailto:your.email@example.com" class="inline-block bg-sky-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-sky-600 transition-colors duration-300">
+                    寄送電子郵件
+                </a>
+
+                <div class="mt-12 flex justify-center space-x-6">
+                    <!-- 修改成您的社群媒體連結 -->
+                    <a href="#" class="text-gray-400 hover:text-sky-400 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-sky-400 transition-colors">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </a>
+                     <a href="#" class="text-gray-400 hover:text-sky-400 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="max-w-screen-xl mx-auto py-6 px-6 md:px-8 text-center text-gray-500">
+            <!-- 修改成您的名字和年份 -->
+            &copy; 2025 王小明. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- 打字機效果 ---
+            const typewriterElement = document.getElementById('typewriter');
+            // 修改此處陣列內的文字，即為打字機顯示的內容
+            const words = ['全端工程師', 'UI/UX 設計師', '攝影愛好者'];
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentWord = words[wordIndex];
+                let displayText = '';
+
+                if (isDeleting) {
+                    // 刪除文字
+                    displayText = currentWord.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    // 輸入文字
+                    displayText = currentWord.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                typewriterElement.textContent = displayText;
+
+                let typeSpeed = isDeleting ? 100 : 200;
+
+                if (!isDeleting && charIndex === currentWord.length) {
+                    // 完成輸入，稍作停留
+                    typeSpeed = 2000;
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    // 完成刪除，切換到下一個字
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                    typeSpeed = 500;
+                }
+
+                setTimeout(type, typeSpeed);
+            }
+            
+            type();
+
+            // --- 滾動淡入效果 ---
+            const scrollElements = document.querySelectorAll('.scroll-reveal');
+
+            const elementInView = (el, dividend = 1) => {
+                const elementTop = el.getBoundingClientRect().top;
+                return (
+                    elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+                );
+            };
+
+            const displayScrollElement = (element) => {
+                element.classList.add('visible');
+            };
+
+            const hideScrollElement = (element) => {
+                element.classList.remove('visible');
+            };
+
+            const handleScrollAnimation = () => {
+                scrollElements.forEach((el) => {
+                    if (elementInView(el, 1.25)) {
+                        displayScrollElement(el);
+                    } 
+                    // 如果需要滾動離開後隱藏，可以取消下面這段註解
+                    // else {
+                    //     hideScrollElement(el);
+                    // }
+                })
+            }
+
+            window.addEventListener('scroll', () => {
+                handleScrollAnimation();
+            });
+            // 初始載入時也檢查一次
+            handleScrollAnimation();
+
+
+            // --- 技能條動畫 ---
+            const skillsSection = document.getElementById('skills');
+            const skillBars = document.querySelectorAll('.skill-bar-fill');
+            let animationDone = false;
+
+            const animateSkills = () => {
+                if (animationDone) return;
+
+                const sectionTop = skillsSection.getBoundingClientRect().top;
+                const sectionVisible = sectionTop < window.innerHeight - 150; // 提前 150px 觸發
+
+                if (sectionVisible) {
+                    skillBars.forEach(bar => {
+                        const level = bar.getAttribute('data-level');
+                        bar.style.width = level;
+                    });
+                    animationDone = true; // 確保動畫只執行一次
+                }
+            };
+
+            window.addEventListener('scroll', animateSkills);
+             // 初始載入時也檢查一次
+            animateSkills();
+        });
+    </script>
+
 </body>
 </html>
